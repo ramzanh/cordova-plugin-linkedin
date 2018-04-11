@@ -238,7 +238,9 @@ public class LinkedIn extends CordovaPlugin {
             
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, true));
         } catch (NameNotFoundException e) {
-            callbackContext.error("NameNotFoundException: " + e.getMessage());
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, false));
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
         }
     }
 }
