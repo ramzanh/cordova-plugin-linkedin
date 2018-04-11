@@ -12,6 +12,9 @@
 
 NSString* const API_URL = @"https://api.linkedin.com/v1/";
 
+//Linkedin APP URI schema
+NSString* const URI_SCHEMA = @"linkedin://";
+
 // convenience method to handle errors on most of the LinkedIn SDK methods
 - (void (^)(LISDKAPIError*)) getError:(CDVInvokedUrlCommand*)command
 {
@@ -158,7 +161,22 @@ NSString* const API_URL = @"https://api.linkedin.com/v1/";
             result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Cannot verify if a preceding session is present"];
         }
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
+
+- (void)isLinkedInAppInstalled:(CDVInvokedUrlCommand*)command
+{
+    [self.commandDelegate runInBackground:^{
+        CDVPluginResult *result;
+        
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:URI_SCHEMA]]) {
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:(true)];
+        } else {
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsBool:(false)];
+        }
+        
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];
+    
 }
 
 @end
