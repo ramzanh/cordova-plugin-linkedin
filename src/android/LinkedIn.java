@@ -3,6 +3,8 @@ package com.zyramedia.cordova.linkedin;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.telecom.Call;
 import android.util.Log;
 
@@ -33,7 +35,9 @@ import java.util.List;
 
 public class LinkedIn extends CordovaPlugin {
 
-    private final String TAG = "--  CordovaLinkedIn  --";
+    private final String TAG = "CordovaLinkedIn";
+
+    private final String LINKEDIN_PACKAGE_ID = "com.linkedin.android";
 
     private LISessionManager liSessionManager;
     private Activity activity;
@@ -71,6 +75,8 @@ public class LinkedIn extends CordovaPlugin {
             hasActiveSession(callbackContext);
         } else if(action.equals("getActiveSession")) {
             getActiveSession(callbackContext);
+        } else if(action.equals("isLinkedInAppInstalled")) {
+            isLinkedInAppInstalled(callbackContext);
         } else {
             return false;
         }
@@ -224,5 +230,15 @@ public class LinkedIn extends CordovaPlugin {
             callbackContext.error(e.getMessage());
         }
     }
-
+    
+    private void isLinkedInAppInstalled(CallbackContext callbackContext) {
+        try {
+            PackageManager pm = cordova.getActivity().getApplicationContext().getPackageManager();
+            pm.getPackageInfo(LINKEDIN_PACKAGE_ID, PackageManager.GET_ACTIVITIES);
+            
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, true));
+        } catch (NameNotFoundException e) {
+            callbackContext.error("NameNotFoundException: " + e.getMessage());
+        }
+    }
 }
