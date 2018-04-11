@@ -37,7 +37,7 @@ module.exports = {
         callNativeMethod('getActiveSession', null, success, error);
     }
 
-    getActiveSession: function (success, error) {
+    isLinkedInAppInstalled: function (success, error) {
         callNativeMethod('isLinkedInAppInstalled', null, success, error);
     }
 };
