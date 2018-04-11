@@ -16,7 +16,7 @@
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml"/>
         <source-file src="src/android/LinkedIn.java" target-dir="src/com/zyramedia/cordova/linkedin"/>
-        <resource-file src="src/android/linkedin.jar" target="libs/linkedin.jar" />
+        <lib-file src="src/android/linkedin.jar"/>
         <framework src="src/android/LinkedIn.gradle" custom="true" type="gradleReference" />
     </platform>
 
