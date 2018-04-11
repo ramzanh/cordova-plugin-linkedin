@@ -6,4 +6,5 @@
 - (void) openProfile: (CDVInvokedUrlCommand *) command;
 - (void) hasActiveSession: (CDVInvokedUrlCommand *) command;
 - (void) getActiveSession: (CDVInvokedUrlCommand *) command;
+- (void) isLinkedInAppInstalled: (CDVInvokedUrlCommand *) command;
 @end
