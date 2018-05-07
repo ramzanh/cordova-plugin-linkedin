@@ -161,6 +161,7 @@ NSString* const URI_SCHEMA = @"linkedin://";
             result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Cannot verify if a preceding session is present"];
         }
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+    }];
 }
 
 - (void)isLinkedInAppInstalled:(CDVInvokedUrlCommand*)command
